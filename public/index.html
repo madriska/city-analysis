@@ -18,12 +18,24 @@ body {
 }
 
 .area {
-  fill: steelblue;
+  fill: #F37F75;
+}
+
+.highLine {
+  fill: none;
+  stroke: #FF2B1A;
+  stroke-width: 3.0px;
+}
+
+.lowLine {
+  fill: none;
+  stroke: #00D15A;
+  stroke-width: 3.0px;
 }
 
 </style>
 <body>
-<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
 <script>
 
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
@@ -51,13 +63,23 @@ var area = d3.svg.area()
     .y0(function(d) { return y(d.low); })
     .y1(function(d) { return y(d.high); });
 
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.tsv("data.tsv", function(error, data) {
+var highLine = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.high); });
+
+var lowLine = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.low); });
+
+var svg = d3.select("body")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.csv("graffiti.csv", function(error, data) {
   if (error) throw error;
 
   data.forEach(function(d) {
@@ -74,6 +96,17 @@ d3.tsv("data.tsv", function(error, data) {
       .attr("class", "area")
       .attr("d", area);
 
+  svg.append("path")
+      .datum(data)
+      .attr("class", "highLine")
+      .attr("d", highLine);
+
+  svg.append("path")
+      .datum(data)
+      .attr("class", "lowLine")
+      .attr("d", lowLine);     
+
+
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
@@ -87,9 +120,8 @@ d3.tsv("data.tsv", function(error, data) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Temperature (ºF)");
+      .text("Number of issues");
 });
-
 </script>
 </body>
 </html>
