@@ -1,0 +1,11 @@
+GEM
+  specs:
+    rack (1.6.4)
+    vienna (0.4.1)
+      rack (~> 1.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  vienna
