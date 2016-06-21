@@ -13,10 +13,6 @@ body {
   shape-rendering: crispEdges;
 }
 
-.x.axis path {
-  display: none;
-}
-
 .area {
   fill: #F37F75;
 }
@@ -44,11 +40,9 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50},
 
 var parseDate = d3.time.format("%Y%m%d").parse;
 
-var x = d3.time.scale()
-    .range([0, width]);
+var x = d3.time.scale().range([0, width]);
 
-var y = d3.scale.linear()
-    .range([height, 0]);
+var y = d3.scale.linear().range([height, 0]);
 
 var xAxis = d3.svg.axis()
     .scale(x)
@@ -62,7 +56,6 @@ var area = d3.svg.area()
     .x(function(d) { return x(d.date); })
     .y0(function(d) { return y(d.low); })
     .y1(function(d) { return y(d.high); });
-
 
 var highLine = d3.svg.line()
     .x(function(d) { return x(d.date); })
@@ -106,7 +99,6 @@ d3.csv("graffiti.csv", function(error, data) {
       .attr("class", "lowLine")
       .attr("d", lowLine);     
 
-
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
@@ -115,12 +107,18 @@ d3.csv("graffiti.csv", function(error, data) {
   svg.append("g")
       .attr("class", "y axis")
       .call(yAxis)
-    .append("text")
+     .append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .text("Number of issues");
+
+  svg.append("text")
+      .attr("x", (width / 2))             
+      .attr("text-anchor", "middle")  
+      .style("font-size", "16px") 
+      .text("Total graffiti issues opened and closed in New Haven over time");
 });
 </script>
 </body>
