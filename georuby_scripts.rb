@@ -16,7 +16,7 @@ def point(x, y)
 end
 
 @obj =  GeoRuby::SimpleFeatures::Geometry.from_geojson(
-  File.read("City of New Haven Aldermanic Wards.geojson")
+  File.read("newhaven.geojson")
 )
 
 puts "status,request_type_id,id_,summary,description,created_at,acknowledged_at,closed_at,lat,lng,address,city_id,ward"
