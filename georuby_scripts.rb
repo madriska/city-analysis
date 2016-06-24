@@ -2,6 +2,8 @@ require "geo_ruby"
 require 'geo_ruby/geojson'
 require "csv"
 
+
+=begin
 # CSV WITH ADDED WARD COLUMN
 
 def ward(point)
@@ -49,6 +51,7 @@ CSV.foreach("wards.csv", headers: true) do |row|
   puts row.to_csv if row["request_type_id"] == "117"
 end
 
+=end
 
 
 # CSV OF ISSUE COUNTS BY WARD
@@ -58,6 +61,8 @@ puts "ward,open,closed"
 wards = Hash.new { |h,k| h[k] = { opened: 0, closed: 0 } }
 
 CSV.foreach("wards.csv", headers: true) do |row|
+  next unless row["request_type_id"] == "117"
+
   ward = row["ward"]
   wards[ward][:opened] += 1 unless row["created_at"].nil?
   wards[ward][:closed] += 1 unless row["closed_at"].nil?
