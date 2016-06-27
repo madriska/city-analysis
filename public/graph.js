@@ -1,4 +1,4 @@
-var graph = function graph(ward, issue, loc) { 
+var graph = function graph(ward, code, loc) { 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
       width = 400 - margin.left - margin.right,
       height = 300 - margin.top - margin.bottom;
@@ -39,7 +39,7 @@ var graph = function graph(ward, issue, loc) {
       .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  var filename = "data/" + issue + "-" + ward + ".csv"
+  var filename = "data/" + code + "-" + ward + ".csv"
   var title = "Ward " + ward
 
   d3.csv(filename, function(error, data) {

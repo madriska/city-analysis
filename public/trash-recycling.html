@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.area {
+  fill: #F37F75;
+}
+
+.highLine {
+  fill: none;
+  stroke: #FF2B1A;
+  stroke-width: 3.0px;
+}
+
+.lowLine {
+  fill: none;
+  stroke: #00D15A;
+  stroke-width: 3.0px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+</style>
+<body>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="graph.js"></script>
+
+<script>
+  var trash_graph = function trash_graph(ward, loc) {
+    graph(ward, "1966", loc);
+  };
+</script>
+
+<div class="container">
+  <div id="row1" class="row">
+    <script>trash_graph("1", "#row1");</script>
+    <script>trash_graph("2", "#row1");</script>
+    <script>trash_graph("3", "#row1");</script>
+  </div>
+  <div id="row2" class="row">
+    <script>trash_graph("4", "#row2");</script>
+    <script>trash_graph("5", "#row2");</script>
+    <script>trash_graph("6", "#row2");</script>
+  </div>
+  <div id="row3" class="row">
+    <script>trash_graph("7", "#row3");</script>
+    <script>trash_graph("8", "#row3");</script>
+    <script>trash_graph("9", "#row3");</script>
+  </div>
+  <div id="row4" class="row">
+    <script>trash_graph("10", "#row4");</script>
+    <script>trash_graph("11", "#row4");</script>
+    <script>trash_graph("12", "#row4");</script>
+  </div>
+  <div id="row5" class="row">
+    <script>trash_graph("13", "#row5");</script>
+    <script>trash_graph("14", "#row5");</script>
+    <script>trash_graph("15", "#row5");</script>
+  </div>
+  <div id="row6" class="row">
+    <script>trash_graph("16", "#row6");</script>
+    <script>trash_graph("17", "#row6");</script>
+    <script>trash_graph("18", "#row6");</script>
+  </div>
+  <div id="row7" class="row">
+    <script>trash_graph("19", "#row7");</script>
+    <script>trash_graph("20", "#row7");</script>
+    <script>trash_graph("21", "#row7");</script>
+  </div>
+  <div id="row8" class="row">
+    <script>trash_graph("22", "#row8");</script>
+    <script>trash_graph("23", "#row8");</script>
+    <script>trash_graph("24", "#row8");</script>
+  </div>
+  <div id="row9" class="row">
+    <script>trash_graph("25", "#row9");</script>
+    <script>trash_graph("26", "#row9");</script>
+    <script>trash_graph("27", "#row9");</script>
+  </div>
+  <div id="row10" class="row">
+    <script>trash_graph("28", "#row10");</script>
+    <script>trash_graph("29", "#row10");</script>
+    <script>trash_graph("30", "#row10");</script>
+  </div>
+</div>
+
+</body>
+</html>
