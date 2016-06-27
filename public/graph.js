@@ -183,19 +183,11 @@ var draw_graph = function draw_graph(ward, code, loc) {
 };
 
 var graph_by_code = function graph_by_code(code) {
-  var dashboard = document.getElementById("dashboard");
-
-  while (dashboard.firstChild) {
-    dashboard.removeChild(dashboard.firstChild);
+  var graphs = document.getElementsByTagName("svg");
+  for (i = graphs.length - 1; i >= 0; i--) {
+    graphs[i].parentNode.removeChild(graphs[i]);
   }
 
-  rows = [1,2,3,4,5,6,7,8,9,10];
-  rows.forEach(function(row) {
-    var r = dashboard.appendChild(document.createElement("div"));
-    r.id = "row" + row;
-    r.className = "row";
-  });
-  
   draw_graph("1", code, "#row1");
   draw_graph("2", code, "#row1");
   draw_graph("3", code, "#row1");

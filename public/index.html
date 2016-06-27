@@ -42,6 +42,12 @@ body {
   justify-content: center;
 }
 
+#select {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0px 10px 0px;
+}
+
 </style>
 <body>
 
@@ -52,40 +58,35 @@ body {
   function change_service_type() {
     var select = document.getElementById("service_types");
     var code = select.options[select.selectedIndex].value;
-    if(code == "") {
-      return;
-    } else {
-      graph_by_code(code);
-    }
+    graph_by_code(code);
   }
 </script>
 
-<select id="service_types" onchange="change_service_type();">
-  <option value="">Select service type</option>
-  <option value="all">All service types</option>
-  <option value="122">Graffiti</option>
-  <option value="117">Sidewalks and Curb damage</option>
-  <option value="51">Traffic Signal / Pedestrian Signal</option>
-  <option value="1966">Trash & Recycling</option>
-</select>
-
-<div id="dashboard">
-  <div id="row1" class="row">
-    <script>graph_by_filename("data/graffiti.csv", "Graffiti", "#row1");</script>
-    <script>graph_by_filename("data/illegal-dumping.csv", "Illegal Dumping", "#row1");</script>
-    <script>graph_by_filename("data/potholes.csv", "Potholes", "#row1");</script>
-  </div>
-  <div id="row2" class="row">
-    <script>graph_by_filename("data/tree-trimming.csv", "Tree Trimming", "#row2");</script>
-    <script>graph_by_filename("data/parks-request.csv", "Parks Request", "#row2");</script>
-    <script>graph_by_filename("data/sidewalks-and-curb-damage.csv", "Sidewalks and Curb Damage", "#row2");</script>
-  </div>
-  <div id="row3" class="row">
-    <script>graph_by_filename("data/policing-issue.csv", "Policing Issue", "#row3");</script>
-    <script>graph_by_filename("data/trash-recycling.csv", "Trash Recycling", "#row3");</script>
-    <script>graph_by_filename("data/health-complaints.csv", "Health Complaints", "#row3");</script>
-  </div>
+<div id="select">
+  <select id="service_types" onchange="change_service_type();" style="font-size: 16px;">
+    <option value="all">All service types</option>
+    <option value="122">Graffiti</option>
+    <option value="117">Sidewalks and Curb damage</option>
+    <option value="51">Traffic Signal / Pedestrian Signal</option>
+    <option value="1966">Trash & Recycling</option>
+  </select>
 </div>
 
+<hr>
+
+<div id="dashboard">
+  <div id="row1" class="row"></div>
+  <div id="row2" class="row"></div>
+  <div id="row3" class="row"></div>
+  <div id="row4" class="row"></div>
+  <div id="row5" class="row"></div>
+  <div id="row6" class="row"></div>
+  <div id="row7" class="row"></div>
+  <div id="row8" class="row"></div>
+  <div id="row9" class="row"></div>
+  <div id="row10" class="row"></div>
+</div>
+
+<script>graph_by_code("all");</script>
 </body>
 </html>
