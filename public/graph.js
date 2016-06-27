@@ -17,7 +17,8 @@ var graph = function graph(ward, code, loc) {
 
   var yAxis = d3.svg.axis()
       .scale(y)
-      .orient("left");
+      .orient("left")
+      .tickFormat(d3.format("d"));
 
   var area = d3.svg.area()
       .x(function(d) { return x(d.week); })
