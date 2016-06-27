@@ -52,8 +52,11 @@ body {
   function change_service_type() {
     var select = document.getElementById("service_types");
     var code = select.options[select.selectedIndex].value;
-    console.log(code);
-    graph_by_code(code);
+    if(code == "") {
+      return;
+    } else {
+      graph_by_code(code);
+    }
   }
 </script>
 
