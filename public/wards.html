@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.area {
+  fill: #F37F75;
+}
+
+.highLine {
+  fill: none;
+  stroke: #FF2B1A;
+  stroke-width: 3.0px;
+}
+
+.lowLine {
+  fill: none;
+  stroke: #00D15A;
+  stroke-width: 3.0px;
+}
+
+#dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#dashboard .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#select {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0px 10px 0px;
+}
+
+</style>
+<body>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="graph.js"></script>
+
+<script>
+  function change_ward() {
+    var select = document.getElementById("wards");
+    var ward = select.options[select.selectedIndex].value;
+    graph_by_ward(ward);
+  }
+</script>
+
+<div id="select">
+  <select id="wards" onchange="change_ward();" style="font-size: 16px;">
+    <option value="all-wards">All wards</option>
+    <option value="1">Ward 1</option>
+    <option value="2">Ward 2</option>
+    <option value="3">Ward 3</option>
+    <option value="4">Ward 4</option>
+    <option value="5">Ward 5</option>
+    <option value="6">Ward 6</option>
+    <option value="7">Ward 7</option>
+    <option value="8">Ward 8</option>
+    <option value="9">Ward 9</option>
+    <option value="10">Ward 10</option>
+    <option value="11">Ward 11</option>
+    <option value="12">Ward 12</option>
+    <option value="13">Ward 13</option>
+    <option value="14">Ward 14</option>
+    <option value="15">Ward 15</option>
+    <option value="16">Ward 16</option>
+    <option value="17">Ward 17</option>
+    <option value="18">Ward 18</option>
+    <option value="19">Ward 19</option>
+    <option value="20">Ward 20</option>
+    <option value="21">Ward 21</option>
+    <option value="22">Ward 22</option>
+    <option value="23">Ward 23</option>
+    <option value="24">Ward 24</option>
+    <option value="25">Ward 25</option>
+    <option value="26">Ward 26</option>
+    <option value="27">Ward 27</option>
+    <option value="28">Ward 28</option>
+    <option value="29">Ward 29</option>
+    <option value="30">Ward 30</option>
+  </select>
+</div>
+
+<hr>
+
+<div id="dashboard">
+  <div id="row1" class="row"></div>
+  <div id="row2" class="row"></div>
+  <div id="row3" class="row"></div>
+  <div id="row4" class="row"></div>
+  <div id="row5" class="row"></div>
+  <div id="row6" class="row"></div>
+  <div id="row7" class="row"></div>
+  <div id="row8" class="row"></div>
+</div>
+
+<script>graph_by_ward("all-wards");</script>
+</body>
+</html>
