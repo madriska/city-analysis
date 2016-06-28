@@ -52,6 +52,7 @@ body {
 <body>
 
 <script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="parseuri.js"></script>
 <script src="graph.js"></script>
 
 <script>
@@ -111,6 +112,18 @@ body {
   <div id="row8" class="row"></div>
 </div>
 
-<script>graph_by_ward("all-wards");</script>
+<script>
+  var link = window.location.href;
+  var ward = parseUri(link)["queryKey"]["ward"];
+
+  if(ward == null) {
+    graph_by_ward("all-wards");
+  } else {
+    var select = document.getElementById("wards");
+    select.value = ward;
+    graph_by_ward(ward);
+  }
+</script>
+
 </body>
 </html>
