@@ -150,7 +150,26 @@ var draw_graph = function draw_graph(type, ward, code, loc, title) {
       d.opened = +d.opened;
     });
 
-    y.domain([d3.min(data, function(d) { return d.closed; }), d3.max(data, function(d) { return d.opened; })]);
+    var total_issues = d3.max(data, function(d) { return d.opened; });
+
+    if(total_issues < 20) {
+      svg.append("text")
+          .attr("x", (width / 2))
+          .attr("text-anchor", "middle")
+          .style("font-size", "16px")
+          .text(title);
+
+      svg.append("text")
+          .attr("x", (width / 2))
+          .attr("y", (height / 2))
+          .attr("text-anchor", "middle")
+          .style("font-size", "14px")
+          .text("Graph omitted due to low issue count (< 20 total)");
+
+      return;
+    }
+
+    y.domain([d3.min(data, function(d) { return d.closed; }), total_issues]);
 
     svg.append("path")
         .datum(data)
