@@ -245,34 +245,34 @@ var graph_by_ward = function graph_by_ward(ward) {
     graphs[i].parentNode.removeChild(graphs[i]);
   }
 
+  draw_graph(type, ward, "5743", "#row1", "Bins for Trash & Recycling");
   draw_graph(type, ward, "122", "#row1", "Graffiti");
-  draw_graph(type, ward, "1966", "#row1", "Trash & Recycling");
-  draw_graph(type, ward, "51", "#row1", "Traffic Signal / Pedestrian Signal");
+  draw_graph(type, ward, "6215", "#row1", "Hangers");
 
-  draw_graph(type, ward, "2625", "#row2", "Traffic/Road Safety");
-  draw_graph(type, ward, "1853", "#row2", "Tree Trimming");
-  draw_graph(type, ward, "1249", "#row2", "Public Space, Streets and Drains");
+  draw_graph(type, ward, "5185", "#row2", "Health Complaints");
+  draw_graph(type, ward, "1250", "#row2", "Illegal Dumping");
+  draw_graph(type, ward, "12386", "#row2", "Library Issues");
 
-  draw_graph(type, ward, "1251", "#row3", "Private Property Issue");
+  draw_graph(type, ward, "374", "#row3", "Other");
   draw_graph(type, ward, "3018", "#row3", "Other - city responsibility");
-  draw_graph(type, ward, "5185", "#row3", "Health Complaints");
+  draw_graph(type, ward, "372", "#row3", "Parking Meter");
 
-  draw_graph(type, ward, "5743", "#row4", "Bins for Trash & Recycling");
-  draw_graph(type, ward, "5251", "#row4", "Street Sweeping");
-  draw_graph(type, ward, "12386", "#row4", "Library Issues");
+  draw_graph(type, ward, "121", "#row4", "Parking Violation/Abandoned Auto");
+  draw_graph(type, ward, "126", "#row4", "Parks Request");
+  draw_graph(type, ward, "2626", "#row4", "Policing Issue");
 
-  draw_graph(type, ward, "374", "#row5", "Other");
-  draw_graph(type, ward, "2626", "#row5", "Policing Issue");
-  draw_graph(type, ward, "6215", "#row5", "Hangers");
+  draw_graph(type, ward, "116", "#row5", "Potholes");
+  draw_graph(type, ward, "1251", "#row5", "Private Property Issue");
+  draw_graph(type, ward, "1249", "#row5", "Public Space, Streets and Drains");
 
   draw_graph(type, ward, "117", "#row6", "Sidewalks and Curb damage");
-  draw_graph(type, ward, "1250", "#row6", "Illegal Dumping");
-  draw_graph(type, ward, "372", "#row6", "Parking Meter");
+  draw_graph(type, ward, "373", "#row6", "Signs / Bus Shelters / Pavement Markings");
+  draw_graph(type, ward, "124", "#row6", "Street Lamp");
 
-  draw_graph(type, ward, "121", "#row7", "Parking Violation/Abandoned Auto");
-  draw_graph(type, ward, "126", "#row7", "Parks Request");
-  draw_graph(type, ward, "116", "#row7", "Potholes");
+  draw_graph(type, ward, "5251", "#row7", "Street Sweeping");
+  draw_graph(type, ward, "51", "#row7", "Traffic Signal / Pedestrian Signal");
+  draw_graph(type, ward, "2625", "#row7", "Traffic/Road Safety");
 
-  draw_graph(type, ward, "373", "#row8", "Signs / Bus Shelters / Pavement Markings");
-  draw_graph(type, ward, "124", "#row8", "Street Lamp");
+  draw_graph(type, ward, "1966", "#row8", "Trash & Recycling");
+  draw_graph(type, ward, "1853", "#row8", "Tree Trimming");
 };
