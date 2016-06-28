@@ -54,12 +54,16 @@ body {
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="parseuri.js"></script>
 <script src="graph.js"></script>
+<script src="//code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
 
 <script>
   function change_ward() {
-    var select = document.getElementById("wards");
-    var ward = select.options[select.selectedIndex].value;
-    graph_by_ward(ward);
+    $(document).ready(function() {
+      var select = document.getElementById("wards");
+      var ward = select.options[select.selectedIndex].value;
+      window.location = "/wards.html?ward=" + ward;
+      graph_by_ward(ward);
+    });
   }
 </script>
 
@@ -113,16 +117,18 @@ body {
 </div>
 
 <script>
-  var link = window.location.href;
-  var ward = parseUri(link)["queryKey"]["ward"];
+  $(document).ready(function() {
+    var link = window.location.href;
+    var ward = parseUri(link)["queryKey"]["ward"];
 
-  if(ward == null) {
-    graph_by_ward("all-wards");
-  } else {
-    var select = document.getElementById("wards");
-    select.value = ward;
-    graph_by_ward(ward);
-  }
+    if(ward == null) {
+      graph_by_ward("all-wards");
+    } else {
+      var select = document.getElementById("wards");
+      select.value = ward;
+      graph_by_ward(ward);
+    }
+  });
 </script>
 
 </body>
