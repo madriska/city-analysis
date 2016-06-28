@@ -21,7 +21,7 @@ require "pp"
   week   = Date.parse("2010-01-01").monday
   finish = Date.parse("2016-06-01").monday
 
-  csv = File.open("public/data/all-#{ward}.csv", "w")
+  csv = File.open("public/data/all-services-#{ward}.csv", "w")
   
   csv.puts "week,opened,closed"
 
