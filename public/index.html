@@ -52,24 +52,9 @@ body {
 <body>
 
 <script src="https://d3js.org/d3.v3.min.js"></script>
-<script src="parseuri.js"></script>
 <script src="graph.js"></script>
 
 <script>
-  var link = window.location.href
-
-  var type = parseUri(link)["queryKey"]["type"],
-      ward = parseUri(link)["queryKey"]["ward"],
-      code = parseUri(link)["queryKey"]["code"];
-
-  var graph_by_link = function graph_by_link(link) {
-    if(type == "code") {
-      graph_by_code(code);
-    } else {
-      graph_by_ward(ward);
-    }
-  };
-
   function change_service_type() {
     var select = document.getElementById("service_types");
     var code = select.options[select.selectedIndex].value;
@@ -121,13 +106,6 @@ body {
   <div id="row10" class="row"></div>
 </div>
 
-<script>
-  if(type == null && ward == null && code == null) {
-    graph_by_code("all-services");
-  } else {
-    graph_by_link(link);
-  }
-</script>
-
+<script>graph_by_code("all-services");</script>
 </body>
 </html>
