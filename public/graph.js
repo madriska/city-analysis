@@ -166,6 +166,17 @@ var draw_graph = function draw_graph(type, ward, code, loc, title) {
           .style("font-size", "14px")
           .text("Graph omitted due to low issue count (< 20 total)");
 
+      svg.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis);
+
+      svg.append("g")
+          .attr("class", "y axis")
+          .call(yAxis);
+
+      svg.selectAll(".tick").remove();
+
       return;
     }
 
