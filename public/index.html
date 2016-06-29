@@ -52,13 +52,19 @@ body {
 <body>
 
 <script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="parseuri.js"></script>
 <script src="graph.js"></script>
+<script src="//code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
 
 <script>
   function change_service_type() {
-    var select = document.getElementById("service_types");
-    var code = select.options[select.selectedIndex].value;
-    graph_by_code(code);
+    $(document).ready(function() {
+      var select = document.getElementById("service_types");
+      var code = select.options[select.selectedIndex].value;
+      var stateObj = { code: code };
+      history.pushState(stateObj, "", "?code=" + code);
+      graph_by_code(code);
+    });
   }
 </script>
 
@@ -106,6 +112,20 @@ body {
   <div id="row10" class="row"></div>
 </div>
 
-<script>graph_by_code("all-services");</script>
+<script>
+  $(document).ready(function() {
+    var link = window.location.href;
+    var code = parseUri(link)["queryKey"]["code"];
+
+    if(code == null) {
+      graph_by_code("all-services");
+    } else {
+      var select = document.getElementById("service_types");
+      select.value = code;
+      graph_by_code(code);
+    }
+  });
+</script>
+
 </body>
 </html>
