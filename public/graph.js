@@ -92,10 +92,10 @@ var draw_graph = function draw_graph(type, ward, code, row, title) {
   if(type == "code") {
     var title = "Ward " + ward,
         filename = "data/" + code + "-" + ward + ".csv",
-        link = "/wards.html?ward=" + ward;
+        link = "/wards.html?breakdown=service&ward=" + ward;
   } else if(type == "ward") {
     var title = title,
-        link = "/?type=ward&code=" + code;
+        link = "/?breakdown=ward&code=" + code;
 
     if(ward == "all-wards") {
       var filename = "data/all-wards-" + code + ".csv";

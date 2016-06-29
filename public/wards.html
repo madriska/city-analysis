@@ -66,14 +66,14 @@ body {
       var select = document.getElementById("wards");
       var ward = select.options[select.selectedIndex].value;
       var stateObj = { ward: ward };
-      history.pushState(stateObj, "", "wards.html?ward=" + ward);
+      history.pushState(stateObj, "", "wards.html?breakdown=service&ward=" + ward);
       graph_by_ward(ward);
     });
   }
 </script>
 
 <div id="nav">
-  <a href="/" style="font-size: 16px; padding-right: 5px;">Breakdown by ward</a>
+  <a href="/" style="font-size: 16px; padding-right: 5px;">Break down by ward</a>
   <select id="wards" onchange="change_ward();" style="font-size: 16px; padding-left: 5px;">
     <option value="all-wards">All wards</option>
     <option value="1">Ward 1</option>
@@ -123,14 +123,19 @@ body {
 <script>
   $(document).ready(function() {
     var link = window.location.href;
-    var ward = parseUri(link)["queryKey"]["ward"];
+    var breakdown = parseUri(link)["queryKey"]["breakdown"],
+        ward = parseUri(link)["queryKey"]["ward"];
 
-    if(ward == null) {
+    if(breakdown == "service") {
+      if(ward == null) {
+        graph_by_ward("all-wards");
+      } else {
+        var select = document.getElementById("wards");
+        select.value = ward;
+        graph_by_ward(ward);
+      }
+    } else if(breakdown == null) {
       graph_by_ward("all-wards");
-    } else {
-      var select = document.getElementById("wards");
-      select.value = ward;
-      graph_by_ward(ward);
     }
   });
 </script>
