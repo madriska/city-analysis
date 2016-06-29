@@ -106,6 +106,7 @@ var draw_graph = function draw_graph(type, ward, code, row, title) {
 
   var a = document.createElement("a");
   a.href = link;
+  a.className = "graphLink";
 
   document.getElementById(row).appendChild(a);
 
@@ -231,7 +232,7 @@ var draw_graph = function draw_graph(type, ward, code, row, title) {
 
 var graph_by_code = function graph_by_code(code) {
   var type = "code";
-  var graphs = document.getElementsByTagName("a");
+  var graphs = document.getElementsByClassName("graphLink");
   for (i = graphs.length - 1; i >= 0; i--) {
     graphs[i].parentNode.removeChild(graphs[i]);
   }
@@ -279,7 +280,7 @@ var graph_by_code = function graph_by_code(code) {
 
 var graph_by_ward = function graph_by_ward(ward) {
   var type = "ward";
-  var graphs = document.getElementsByTagName("a");
+  var graphs = document.getElementsByClassName("graphLink");
   for (i = graphs.length - 1; i >= 0; i--) {
     graphs[i].parentNode.removeChild(graphs[i]);
   }
