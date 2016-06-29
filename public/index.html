@@ -34,6 +34,7 @@ body {
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
+  padding-top: 50px;
 }
 
 #dashboard .row {
@@ -42,10 +43,14 @@ body {
   justify-content: center;
 }
 
-#select {
-  display: flex;
-  justify-content: center;
+#nav {
+  position: fixed;
+  width: 100%;
+  background-color: #eee;
+  text-align: center;
   padding: 10px 0px 10px 0px;
+  border-bottom: 1px solid black;
+  margin: -10px -10px 0px -10px;
 }
 
 </style>
@@ -68,8 +73,9 @@ body {
   }
 </script>
 
-<div id="select">
-  <select id="service_types" onchange="change_service_type();" style="font-size: 16px;">
+<div id="nav">
+  <a href="/wards.html" style="font-size: 14px; padding-right: 5px;">Breakdown by ward</a>
+  <select id="service_types" onchange="change_service_type();" style="font-size: 16px; padding-left: 5px;">
     <option value="all-services">All service types</option>
     <option value="5743">Bins for Trash & Recycling</option>
     <option value="122">Graffiti</option>
@@ -96,8 +102,6 @@ body {
     <option value="1853">Tree Trimming</option>
   </select>
 </div>
-
-<hr>
 
 <div id="dashboard">
   <div id="row1" class="row"></div>
