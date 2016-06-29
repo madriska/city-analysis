@@ -95,7 +95,7 @@ var draw_graph = function draw_graph(type, ward, code, row, title) {
         link = "/wards.html?ward=" + ward;
   } else if(type == "ward") {
     var title = title,
-        link = "/?code=" + code;
+        link = "/?type=ward&code=" + code;
 
     if(ward == "all-wards") {
       var filename = "data/all-wards-" + code + ".csv";
