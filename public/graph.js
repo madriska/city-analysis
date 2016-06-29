@@ -98,7 +98,7 @@ var draw_graph = function draw_graph(type, ward, code, row, title) {
         link = "/?code=" + code;
 
     if(ward == "all-wards") {
-      var filenane = "data/all-wards-" + code + ".csv";
+      var filename = "data/all-wards-" + code + ".csv";
     } else {
       var filename = "data/" + code + "-" + ward + ".csv";
     }
