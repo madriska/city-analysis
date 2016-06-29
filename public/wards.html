@@ -61,7 +61,8 @@ body {
     $(document).ready(function() {
       var select = document.getElementById("wards");
       var ward = select.options[select.selectedIndex].value;
-      window.location = "/wards.html?ward=" + ward;
+      var stateObj = { ward: ward };
+      history.pushState(stateObj, "", "wards.html?ward=" + ward);
       graph_by_ward(ward);
     });
   }
