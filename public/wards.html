@@ -34,6 +34,7 @@ body {
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
+  padding-top: 50px;
 }
 
 #dashboard .row {
@@ -42,12 +43,15 @@ body {
   justify-content: center;
 }
 
-#select {
-  display: flex;
-  justify-content: center;
-  padding: 10px 0px 10px 0px;
+#nav {
+  position: fixed;
+  width: 100%;
+  background-color: #eee;
+  text-align: center;
+  padding: 15px 0px 15px 0px;
+  border-bottom: 1px solid black;
+  margin: -10px -10px 0px -10px;
 }
-
 </style>
 <body>
 
@@ -68,8 +72,9 @@ body {
   }
 </script>
 
-<div id="select">
-  <select id="wards" onchange="change_ward();" style="font-size: 16px;">
+<div id="nav">
+  <a href="/" style="font-size: 16px; padding-right: 5px;">Breakdown by ward</a>
+  <select id="wards" onchange="change_ward();" style="font-size: 16px; padding-left: 5px;">
     <option value="all-wards">All wards</option>
     <option value="1">Ward 1</option>
     <option value="2">Ward 2</option>
@@ -103,8 +108,6 @@ body {
     <option value="30">Ward 30</option>
   </select>
 </div>
-
-<hr>
 
 <div id="dashboard">
   <div id="row1" class="row"></div>
