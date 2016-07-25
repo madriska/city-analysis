@@ -166,16 +166,7 @@ body {
 </div>
 
 <div class="container" id="dashboard">
-  <div id="row1" class="row"></div>
-  <div id="row2" class="row"></div>
-  <div id="row3" class="row"></div>
-  <div id="row4" class="row"></div>
-  <div id="row5" class="row"></div>
-  <div id="row6" class="row"></div>
-  <div id="row7" class="row"></div>
-  <div id="row8" class="row"></div>
-  <div id="row9" class="row"></div>
-  <div id="row10" class="row"></div>
+  <div id="graphs" class="row"></div>
 </div>
 
 <script>
@@ -187,8 +178,6 @@ body {
 
     if(breakdown == "ward") {
       $("#service_select").show();
-      $("#row9").show();
-      $("#row10").show();
       $("#ward_select").hide();
 
       if(code == null) {
@@ -200,8 +189,6 @@ body {
       }
     } else if(breakdown == "service") {
       $("#service_select").hide();
-      $("#row9").hide();
-      $("#row10").hide();
       $("#ward_select").show();
 
       if(ward == null) {
@@ -213,8 +200,6 @@ body {
       }
     } else if(breakdown == null) {
       $("#service_select").show();
-      $("#row9").show();
-      $("#row10").show();
       $("#ward_select").hide();
 
       graph_by_code("all-services");

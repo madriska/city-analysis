@@ -88,7 +88,7 @@ var graph_by_filename = function graph_by_filename(filename, title, loc) {
   });
 };
 
-var draw_graph = function draw_graph(type, ward, code, row, title) {
+var draw_graph = function draw_graph(type, ward, code, title) {
   if(type == "code") {
     var title = "Ward " + ward,
         filename = "data/" + code + "-" + ward + ".csv",
@@ -104,11 +104,14 @@ var draw_graph = function draw_graph(type, ward, code, row, title) {
     }
   }
 
+  var col = document.createElement("div");
+  col.className = "col-md-4";
+
   var a = document.createElement("a");
   a.href = link;
   a.className = "graphLink";
 
-  document.getElementById(row).appendChild(a);
+  document.getElementById("graphs").appendChild(col).appendChild(a);
 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
       width = 400 - margin.left - margin.right,
@@ -232,87 +235,52 @@ var draw_graph = function draw_graph(type, ward, code, row, title) {
 
 var graph_by_code = function graph_by_code(code) {
   var type = "code";
-  var graphs = document.getElementsByClassName("graphLink");
+  var graphs = document.getElementsByClassName("col-md-4");
   for (i = graphs.length - 1; i >= 0; i--) {
     graphs[i].parentNode.removeChild(graphs[i]);
   }
 
-  draw_graph(type, "1", code, "row1");
-  draw_graph(type, "2", code, "row1");
-  draw_graph(type, "3", code, "row1");
-
-  draw_graph(type, "4", code, "row2");
-  draw_graph(type, "5", code, "row2");
-  draw_graph(type, "6", code, "row2");
-
-  draw_graph(type, "7", code, "row3");
-  draw_graph(type, "8", code, "row3");
-  draw_graph(type, "9", code, "row3");
-
-  draw_graph(type, "10", code, "row4");
-  draw_graph(type, "11", code, "row4");
-  draw_graph(type, "12", code, "row4");
-
-  draw_graph(type, "13", code, "row5");
-  draw_graph(type, "14", code, "row5");
-  draw_graph(type, "15", code, "row5");
-
-  draw_graph(type, "16", code, "row6");
-  draw_graph(type, "17", code, "row6");
-  draw_graph(type, "18", code, "row6");
-
-  draw_graph(type, "19", code, "row7");
-  draw_graph(type, "20", code, "row7");
-  draw_graph(type, "21", code, "row7");
-
-  draw_graph(type, "22", code, "row8");
-  draw_graph(type, "23", code, "row8");
-  draw_graph(type, "24", code, "row8");
-
-  draw_graph(type, "25", code, "row9");
-  draw_graph(type, "26", code, "row9");
-  draw_graph(type, "27", code, "row9");
-
-  draw_graph(type, "28", code, "row10");
-  draw_graph(type, "29", code, "row10");
-  draw_graph(type, "30", code, "row10");
+  for (i = 1; i < 31; i++) {
+    var ward = i.toString();
+    draw_graph(type, ward, code);
+  }
 };
 
 var graph_by_ward = function graph_by_ward(ward) {
   var type = "ward";
-  var graphs = document.getElementsByClassName("graphLink");
+  var graphs = document.getElementsByClassName("col-md-4");
   for (i = graphs.length - 1; i >= 0; i--) {
     graphs[i].parentNode.removeChild(graphs[i]);
   }
 
-  draw_graph(type, ward, "5743", "row1", "Bins for Trash & Recycling");
-  draw_graph(type, ward, "122",  "row1", "Graffiti");
-  draw_graph(type, ward, "6215", "row1", "Hangers");
+  draw_graph(type, ward, "5743", "Bins for Trash & Recycling");
+  draw_graph(type, ward, "122",  "Graffiti");
+  draw_graph(type, ward, "6215", "Hangers");
 
-  draw_graph(type, ward, "5185",  "row2", "Health Complaints");
-  draw_graph(type, ward, "1250",  "row2", "Illegal Dumping");
-  draw_graph(type, ward, "12386", "row2", "Library Issues");
+  draw_graph(type, ward, "5185",  "Health Complaints");
+  draw_graph(type, ward, "1250",  "Illegal Dumping");
+  draw_graph(type, ward, "12386", "Library Issues");
 
-  draw_graph(type, ward, "374",  "row3", "Other");
-  draw_graph(type, ward, "3018", "row3", "Other - city responsibility");
-  draw_graph(type, ward, "372",  "row3", "Parking Meter");
+  draw_graph(type, ward, "374",  "Other");
+  draw_graph(type, ward, "3018", "Other - city responsibility");
+  draw_graph(type, ward, "372",  "Parking Meter");
 
-  draw_graph(type, ward, "121",  "row4", "Parking Violation/Abandoned Auto");
-  draw_graph(type, ward, "126",  "row4", "Parks Request");
-  draw_graph(type, ward, "2626", "row4", "Policing Issue");
+  draw_graph(type, ward, "121",  "Parking Violation/Abandoned Auto");
+  draw_graph(type, ward, "126",  "Parks Request");
+  draw_graph(type, ward, "2626", "Policing Issue");
 
-  draw_graph(type, ward, "116",  "row5", "Potholes");
-  draw_graph(type, ward, "1251", "row5", "Private Property Issue");
-  draw_graph(type, ward, "1249", "row5", "Public Space, Streets and Drains");
+  draw_graph(type, ward, "116",  "Potholes");
+  draw_graph(type, ward, "1251", "Private Property Issue");
+  draw_graph(type, ward, "1249", "Public Space, Streets and Drains");
 
-  draw_graph(type, ward, "117", "row6", "Sidewalks and Curb damage");
-  draw_graph(type, ward, "373", "row6", "Signs / Bus Shelters / Pavement Markings");
-  draw_graph(type, ward, "124", "row6", "Street Lamp");
+  draw_graph(type, ward, "117", "Sidewalks and Curb damage");
+  draw_graph(type, ward, "373", "Signs / Bus Shelters / Pavement Markings");
+  draw_graph(type, ward, "124", "Street Lamp");
 
-  draw_graph(type, ward, "5251", "row7", "Street Sweeping");
-  draw_graph(type, ward, "51",   "row7", "Traffic Signal / Pedestrian Signal");
-  draw_graph(type, ward, "2625", "row7", "Traffic/Road Safety");
+  draw_graph(type, ward, "5251", "Street Sweeping");
+  draw_graph(type, ward, "51",   "Traffic Signal / Pedestrian Signal");
+  draw_graph(type, ward, "2625", "Traffic/Road Safety");
 
-  draw_graph(type, ward, "1966", "row8", "Trash & Recycling");
-  draw_graph(type, ward, "1853", "row8", "Tree Trimming");
+  draw_graph(type, ward, "1966", "Trash & Recycling");
+  draw_graph(type, ward, "1853", "Tree Trimming");
 };
