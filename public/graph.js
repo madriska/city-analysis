@@ -104,14 +104,11 @@ var draw_graph = function draw_graph(type, ward, code, title) {
     }
   }
 
-  var col = document.createElement("div");
-  col.className = "col-md-4 col-sm-6";
-
   var a = document.createElement("a");
   a.href = link;
   a.className = "graphLink";
 
-  document.getElementById("graphs").appendChild(col).appendChild(a);
+  document.getElementById("graphs").appendChild(a);
 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
       width = 400 - margin.left - margin.right,
@@ -153,6 +150,8 @@ var draw_graph = function draw_graph(type, ward, code, title) {
           .attr("height", height + margin.top + margin.bottom)
       .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  
+  svg.className = "col-md-4 col-sm-6";
 
   d3.csv(filename, function(error, data) {
     if (error) throw error;
