@@ -39,8 +39,8 @@ body {
   z-index: 1;
   width: 100%;
   background-color: #eee;
-  text-align: center;
-  padding: 15px 0px 15px 0px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   border-bottom: 1px solid black;
 }
 
@@ -69,71 +69,78 @@ body {
 </script>
 
 <div id="nav">
-  <div id="service_select">
-    <a href="{{ '/?breakdown=service&ward=all-wards' | prepend: site.baseurl }}" style="font-size: 16px; padding-right: 5px;">View issues by service type</a>
-    <select id="service_types" onchange="change_service_type();" style="font-size: 16px; padding-left: 5px;">
-      <option value="all-services">All service types</option>
-      <option value="5743">Bins for Trash & Recycling</option>
-      <option value="122">Graffiti</option>
-      <option value="6215">Hangers</option>
-      <option value="5185">Health Complaints</option>
-      <option value="1250">Illegal Dumping</option>
-      <option value="12386">Library Issues</option>
-      <option value="374">Other</option>
-      <option value="3018">Other - city responsibility</option>
-      <option value="372">Parking Meter</option>
-      <option value="121">Parking Violation/Abandoned Auto</option>
-      <option value="126">Parks Request</option>
-      <option value="2626">Policing Issue</option>
-      <option value="116">Potholes</option>
-      <option value="1251">Private Property Issue</option>
-      <option value="1249">Public Space, Streets and Drains</option>
-      <option value="117">Sidewalks and Curb damage</option>
-      <option value="373">Signs / Bus Shelters / Pavement Markings</option>
-      <option value="124">Street Lamp</option>
-      <option value="5251">Street Sweeping</option>
-      <option value="51">Traffic Signal / Pedestrian Signal</option>
-      <option value="2625">Traffic/Road Safety</option>
-      <option value="1966">Trash & Recycling</option>
-      <option value="1853">Tree Trimming</option>
-    </select>
-  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4"></div>
 
-  <div id="ward_select">
-    <a href="{{ '/?breakdown=ward&code=all-services' | prepend: site.baseurl }}" style="font-size: 16px; padding-right: 5px;">View issues by ward</a>
-    <select id="wards" onchange="change_ward();" style="font-size: 16px; padding-left: 5px;">
-      <option value="all-wards">All wards</option>
-      <option value="1">Ward 1</option>
-      <option value="2">Ward 2</option>
-      <option value="3">Ward 3</option>
-      <option value="4">Ward 4</option>
-      <option value="5">Ward 5</option>
-      <option value="6">Ward 6</option>
-      <option value="7">Ward 7</option>
-      <option value="8">Ward 8</option>
-      <option value="9">Ward 9</option>
-      <option value="10">Ward 10</option>
-      <option value="11">Ward 11</option>
-      <option value="12">Ward 12</option>
-      <option value="13">Ward 13</option>
-      <option value="14">Ward 14</option>
-      <option value="15">Ward 15</option>
-      <option value="16">Ward 16</option>
-      <option value="17">Ward 17</option>
-      <option value="18">Ward 18</option>
-      <option value="19">Ward 19</option>
-      <option value="20">Ward 20</option>
-      <option value="21">Ward 21</option>
-      <option value="22">Ward 22</option>
-      <option value="23">Ward 23</option>
-      <option value="24">Ward 24</option>
-      <option value="25">Ward 25</option>
-      <option value="26">Ward 26</option>
-      <option value="27">Ward 27</option>
-      <option value="28">Ward 28</option>
-      <option value="29">Ward 29</option>
-      <option value="30">Ward 30</option>
-    </select>
+      <div class="col-md-4 text-center">
+        <select id="service_types" onchange="change_service_type();" style="font-size: 16px;">
+          <option value="all-services">All service types</option>
+          <option value="5743">Bins for Trash & Recycling</option>
+          <option value="122">Graffiti</option>
+          <option value="6215">Hangers</option>
+          <option value="5185">Health Complaints</option>
+          <option value="1250">Illegal Dumping</option>
+          <option value="12386">Library Issues</option>
+          <option value="374">Other</option>
+          <option value="3018">Other - city responsibility</option>
+          <option value="372">Parking Meter</option>
+          <option value="121">Parking Violation/Abandoned Auto</option>
+          <option value="126">Parks Request</option>
+          <option value="2626">Policing Issue</option>
+          <option value="116">Potholes</option>
+          <option value="1251">Private Property Issue</option>
+          <option value="1249">Public Space, Streets and Drains</option>
+          <option value="117">Sidewalks and Curb damage</option>
+          <option value="373">Signs / Bus Shelters / Pavement Markings</option>
+          <option value="124">Street Lamp</option>
+          <option value="5251">Street Sweeping</option>
+          <option value="51">Traffic Signal / Pedestrian Signal</option>
+          <option value="2625">Traffic/Road Safety</option>
+          <option value="1966">Trash & Recycling</option>
+          <option value="1853">Tree Trimming</option>
+        </select>
+
+        <select id="wards" onchange="change_ward();" style="font-size: 16px;">
+          <option value="all-wards">All wards</option>
+          <option value="1">Ward 1</option>
+          <option value="2">Ward 2</option>
+          <option value="3">Ward 3</option>
+          <option value="4">Ward 4</option>
+          <option value="5">Ward 5</option>
+          <option value="6">Ward 6</option>
+          <option value="7">Ward 7</option>
+          <option value="8">Ward 8</option>
+          <option value="9">Ward 9</option>
+          <option value="10">Ward 10</option>
+          <option value="11">Ward 11</option>
+          <option value="12">Ward 12</option>
+          <option value="13">Ward 13</option>
+          <option value="14">Ward 14</option>
+          <option value="15">Ward 15</option>
+          <option value="16">Ward 16</option>
+          <option value="17">Ward 17</option>
+          <option value="18">Ward 18</option>
+          <option value="19">Ward 19</option>
+          <option value="20">Ward 20</option>
+          <option value="21">Ward 21</option>
+          <option value="22">Ward 22</option>
+          <option value="23">Ward 23</option>
+          <option value="24">Ward 24</option>
+          <option value="25">Ward 25</option>
+          <option value="26">Ward 26</option>
+          <option value="27">Ward 27</option>
+          <option value="28">Ward 28</option>
+          <option value="29">Ward 29</option>
+          <option value="30">Ward 30</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 text-right">
+        <a id="view_by_type" href="{{ '/?breakdown=service&ward=all-wards' | prepend: site.baseurl }}" style="font-size: 16px;">View issues by service type</a>
+        <a id="view_by_ward" href="{{ '/?breakdown=ward&code=all-services' | prepend: site.baseurl }}" style="font-size: 16px;">View issues by ward</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -149,8 +156,10 @@ body {
         ward = parseUri(link)["queryKey"]["ward"];
 
     if(breakdown == "ward") {
-      $("#service_select").show();
-      $("#ward_select").hide();
+      $("#service_types").show();
+      $("#view_by_ward").show();
+      $("#wards").hide();
+      $("#view_by_type").hide();
 
       if(code == null) {
         graph_by_code("all-services");
@@ -160,8 +169,10 @@ body {
         graph_by_code(code);
       }
     } else if(breakdown == "service") {
-      $("#service_select").hide();
-      $("#ward_select").show();
+      $("#service_types").hide();
+      $("#view_by_ward").hide();
+      $("#wards").show();
+      $("#view_by_type").show();
 
       if(ward == null) {
         graph_by_ward("all-wards");
@@ -171,8 +182,10 @@ body {
         graph_by_ward(ward);
       }
     } else if(breakdown == null) {
-      $("#service_select").show();
-      $("#ward_select").hide();
+      $("#service_types").show();
+      $("#view_by_ward").show();
+      $("#wards").hide();
+      $("#view_by_type").hide();
 
       graph_by_code("all-services");
     }
