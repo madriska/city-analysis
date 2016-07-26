@@ -1,3 +1,3 @@
 source 'https://rubygems.org'
 
-gem 'vienna'
+gem 'github-pages'
