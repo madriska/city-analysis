@@ -91,16 +91,16 @@ var graph_by_filename = function graph_by_filename(filename, title, loc) {
 var draw_graph = function draw_graph(type, ward, code, title) {
   if(type == "code") {
     var title = "Ward " + ward,
-        filename = "data/" + code + "-" + ward + ".csv",
-        link = "/?breakdown=service&ward=" + ward;
+        filename = "assets/data/" + code + "-" + ward + ".csv",
+        link = "/city-analysis/?breakdown=service&ward=" + ward;
   } else if(type == "ward") {
     var title = title,
-        link = "/?breakdown=ward&code=" + code;
+        link = "/city-analysis/?breakdown=ward&code=" + code;
 
     if(ward == "all-wards") {
-      var filename = "data/all-wards-" + code + ".csv";
+      var filename = "assets/data/all-wards-" + code + ".csv";
     } else {
-      var filename = "data/" + code + "-" + ward + ".csv";
+      var filename = "assets/data/" + code + "-" + ward + ".csv";
     }
   }
 
