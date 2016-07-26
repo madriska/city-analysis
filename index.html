@@ -78,7 +78,6 @@ svg {
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-4"></div>
-
       <div class="col-md-4 text-center">
         <select class="form-control select2" id="service_types" onchange="change_service_type();">
           <option value="all-services">All service types</option>
@@ -142,7 +141,7 @@ svg {
         </select>
       </div>
 
-      <div class="col-md-4 text-right">
+      <div class="col-md-4 text-right" style="padding-top: 5px;">
         <a id="view_by_type" href="{{ '/?breakdown=service&ward=all-wards' | prepend: site.baseurl }}" style="font-size: 16px;">View issues by service type</a>
         <a id="view_by_ward" href="{{ '/?breakdown=ward&code=all-services' | prepend: site.baseurl }}" style="font-size: 16px;">View issues by ward</a>
       </div>
