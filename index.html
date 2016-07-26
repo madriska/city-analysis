@@ -3,7 +3,7 @@ layout: default
 ---
 
 <style>
-body {
+svg {
   font-size: 10px;
 }
 
@@ -44,6 +44,12 @@ body {
   border-bottom: 1px solid black;
 }
 
+.select2-container--bootstrap .select2-selection,
+.select2-container--bootstrap .select2-search--dropdown .select2-search__field,
+.select2-results {
+  font-size: 16px;
+}
+
 </style>
 
 <script>
@@ -74,7 +80,7 @@ body {
       <div class="col-md-4"></div>
 
       <div class="col-md-4 text-center">
-        <select id="service_types" onchange="change_service_type();" style="font-size: 16px;">
+        <select class="form-control select2" id="service_types" onchange="change_service_type();">
           <option value="all-services">All service types</option>
           <option value="5743">Bins for Trash & Recycling</option>
           <option value="122">Graffiti</option>
@@ -101,7 +107,7 @@ body {
           <option value="1853">Tree Trimming</option>
         </select>
 
-        <select id="wards" onchange="change_ward();" style="font-size: 16px;">
+        <select class="form-control select2" id="wards" onchange="change_ward();">
           <option value="all-wards">All wards</option>
           <option value="1">Ward 1</option>
           <option value="2">Ward 2</option>
@@ -156,10 +162,10 @@ body {
         ward = parseUri(link)["queryKey"]["ward"];
 
     if(breakdown == "ward") {
-      $("#service_types").show();
-      $("#view_by_ward").show();
+      $("#service_types").show().select2({ theme: "bootstrap" });
+      $("#view_by_type").show();
       $("#wards").hide();
-      $("#view_by_type").hide();
+      $("#view_by_ward").hide();
 
       if(code == null) {
         graph_by_code("all-services");
@@ -170,9 +176,9 @@ body {
       }
     } else if(breakdown == "service") {
       $("#service_types").hide();
-      $("#view_by_ward").hide();
-      $("#wards").show();
-      $("#view_by_type").show();
+      $("#view_by_type").hide();
+      $("#wards").show().select2({ theme: "bootstrap" });
+      $("#view_by_ward").show();
 
       if(ward == null) {
         graph_by_ward("all-wards");
@@ -182,10 +188,10 @@ body {
         graph_by_ward(ward);
       }
     } else if(breakdown == null) {
-      $("#service_types").show();
-      $("#view_by_ward").show();
+      $("#service_types").show().select2({ theme: "bootstrap" });
+      $("#view_by_type").show();
       $("#wards").hide();
-      $("#view_by_type").hide();
+      $("#view_by_ward").hide();
 
       graph_by_code("all-services");
     }
