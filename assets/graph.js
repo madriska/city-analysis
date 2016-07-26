@@ -234,9 +234,9 @@ var draw_graph = function draw_graph(type, ward, code, title) {
 
 var graph_by_code = function graph_by_code(code) {
   var type = "code";
-  var graphs = document.getElementsByClassName("col-md-4 col-sm-6");
-  for (i = graphs.length - 1; i >= 0; i--) {
-    graphs[i].parentNode.removeChild(graphs[i]);
+  var graphs = document.getElementById("graphs");
+  while (graphs.hasChildNodes()) {
+    graphs.removeChild(graphs.lastChild);
   }
 
   for (i = 1; i < 31; i++) {
@@ -247,9 +247,9 @@ var graph_by_code = function graph_by_code(code) {
 
 var graph_by_ward = function graph_by_ward(ward) {
   var type = "ward";
-  var graphs = document.getElementsByClassName("col-md-4 col-sm-6");
-  for (i = graphs.length - 1; i >= 0; i--) {
-    graphs[i].parentNode.removeChild(graphs[i]);
+  var graphs = document.getElementById("graphs");
+  while (graphs.hasChildNodes()) {
+    graphs.removeChild(graphs.lastChild);
   }
 
   draw_graph(type, ward, "5743", "Bins for Trash & Recycling");
