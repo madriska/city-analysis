@@ -155,13 +155,16 @@ svg {
 
 <script>
   $(document).ready(function() {
+    $.fn.select2.defaults.set("width", null);
+    $.fn.select2.defaults.set("theme", "bootstrap");
+
     var link = window.location.href;
     var breakdown = parseUri(link)["queryKey"]["breakdown"],
         code = parseUri(link)["queryKey"]["code"],
         ward = parseUri(link)["queryKey"]["ward"];
 
     if(breakdown == "ward") {
-      $("#service_types").show().select2({ theme: "bootstrap" });
+      $("#service_types").show().select2();
       $("#view_by_type").show();
       $("#wards").hide();
       $("#view_by_ward").hide();
@@ -176,7 +179,7 @@ svg {
     } else if(breakdown == "service") {
       $("#service_types").hide();
       $("#view_by_type").hide();
-      $("#wards").show().select2({ theme: "bootstrap" });
+      $("#wards").show().select2();
       $("#view_by_ward").show();
 
       if(ward == null) {
@@ -187,7 +190,7 @@ svg {
         graph_by_ward(ward);
       }
     } else if(breakdown == null) {
-      $("#service_types").show().select2({ theme: "bootstrap" });
+      $("#service_types").show().select2();
       $("#view_by_type").show();
       $("#wards").hide();
       $("#view_by_ward").hide();
