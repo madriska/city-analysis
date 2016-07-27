@@ -89,20 +89,35 @@ var graph_by_filename = function graph_by_filename(filename, title, loc) {
 };
 
 var draw_graph = function draw_graph(type, ward, code, title) {
-  if(type == "code") {
-    var title = "Ward " + ward,
-        filename = "assets/data/" + code + "-" + ward + ".csv",
-        link = "/city-analysis/?breakdown=service&ward=" + ward;
-  } else if(type == "ward") {
-    var title = title,
-        link = "/city-analysis/?breakdown=ward&code=" + code;
+  var url = window.location.href;
+  var start_date = parseUri(url)["queryKey"]["start"],
+      end_date = parseUri(url)["queryKey"]["end"];
 
-    if(ward == "all-wards") {
-      var filename = "assets/data/all-wards-" + code + ".csv";
+  var params = [],
+      filename = "assets/data/";
+
+  if (start_date == null && end_date == null) {
+    start_date = "2010-01-01";
+    end_date = "2016-05-31";
+  } else {
+    params.push("start=" + start_date, "end=" + end_date);
+  }
+
+  if (type == "code") {
+    title = "Ward " + ward;
+    filename += code + "-" + ward + ".csv";
+    params.push("breakdown=service", "ward=" + ward);
+  } else if (type == "ward") {
+    params.push("breakdown=ward", "code=" + code);
+
+    if (ward == "all-wards") {
+      filename += "all-wards-" + code + ".csv";
     } else {
-      var filename = "assets/data/" + code + "-" + ward + ".csv";
+      filename += code + "-" + ward + ".csv";
     }
   }
+
+  link = "/city-analysis/?" + params.join("&");
 
   var a = document.createElement("a");
   a.href = link;
@@ -116,13 +131,14 @@ var draw_graph = function draw_graph(type, ward, code, title) {
 
   var parseDate = d3.time.format("%Y-%m-%d").parse;
 
-  var mindate = new Date(2009,12,28),
-      maxdate = new Date(2016,5,23);
+  var mindate = new Date(start_date),
+      maxdate = new Date(end_date);
 
   var x = d3.time.scale().domain([mindate, maxdate]).range([0, width]);
   var y = d3.scale.linear().range([height, 0]);
 
   var xAxis = d3.svg.axis()
+      .ticks(5)
       .scale(x)
       .orient("bottom");
 
@@ -151,15 +167,19 @@ var draw_graph = function draw_graph(type, ward, code, title) {
       .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   
-  svg.className = "col-md-4 col-sm-6";
+  svg.className = "col-sm-6 col-md-4";
 
   d3.csv(filename, function(error, data) {
     if (error) throw error;
 
+    data = _.filter(data, function(d) {
+      return d.week >= start_date && d.week <= end_date;
+    });
+
     data.forEach(function(d) {
       d.week = parseDate(d.week);
-      d.closed = +d.closed;
       d.opened = +d.opened;
+      d.closed = +d.closed;
     });
 
     var total_issues = d3.max(data, function(d) { return d.opened; });

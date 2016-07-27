@@ -67,37 +67,49 @@ svg {
 </style>
 
 <script>
-  function change_service_type() {
+  function change_service_type(start_date, end_date) {
     $(document).ready(function() {
       var select = document.getElementById("service_types");
       var code = select.options[select.selectedIndex].value;
+
+      var params = [start_date, end_date, "breakdown=ward", "code=" + code];
       var stateObj = { code: code };
-      history.pushState(stateObj, "", "?breakdown=ward&code=" + code);
+      history.pushState(stateObj, "", "?" + params.join("&"))
       graph_by_code(code);
     });
   }
 
-  function change_ward() {
+  function change_ward(start_date, end_date) {
     $(document).ready(function() {
       var select = document.getElementById("wards");
       var ward = select.options[select.selectedIndex].value;
+
+      var params = [start_date, end_date, "breakdown=service", "ward=" + ward];
       var stateObj = { ward: ward };
-      history.pushState(stateObj, "", "?breakdown=service&ward=" + ward);
+      history.pushState(stateObj, "", "?" + params.join("&"));
       graph_by_ward(ward);
     });
   }
 
   function change_date() {
     $(document).ready(function() {
-      var mindate = "2009-12-28",
-          maxdate = "2016-05-23";
+      var mindate = "2010-01-01",
+          maxdate = "2016-05-31";
 
       var start_date = document.getElementById("start").value,
           end_date = document.getElementById("end").value;
 
       if (start_date != mindate || end_date != maxdate) {
-        var stateObj = { start_date: start_date, end_date: end_date };
-        history.pushState(stateObj, "", "?start=" + start_date + "&end=" + end_date);
+        var dates = ["start=" + start_date, "end=" + end_date];
+
+        var link = window.location.href;
+        var breakdown = parseUri(link)["queryKey"]["breakdown"];
+
+        if (breakdown == "ward" || breakdown == null) {
+          change_service_type("start=" + start_date, "end=" + end_date);
+        } else if (breakdown == "service") {
+          change_ward("start=" + start_date, "end=" + end_date);
+        }
       }
     });
   }
@@ -108,9 +120,9 @@ svg {
     <div class="row">
       <div class="col-md-4">
         <div class="input-daterange input-group" id="datepicker">
-          <input type="text" class="form-control" name="start" id="start" value="2009-12-28" onChange="change_date();"/>
+          <input type="text" class="form-control" name="start" id="start" value="2010-01-01" onChange="change_date();"/>
           <span class="input-group-addon">to</span>
-          <input type="text" class="form-control" name="end" id="end" value="2016-05-23" onChange="change_date();" />
+          <input type="text" class="form-control" name="end" id="end" value="2016-05-31" onChange="change_date();" />
         </div>
       </div>
 
