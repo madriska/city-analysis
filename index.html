@@ -88,15 +88,18 @@ svg {
   }
 
   function change_date() {
-    /*
     $(document).ready(function() {
-      var start_date = document.getElementById("start"),
-          end_date = document.getElementById("end");
+      var mindate = "2009-12-28",
+          maxdate = "2016-05-23";
 
-      var stateObj = { start_date: start_date, end_date: end_date };
-      history.pushState(stateObj, "", "?start=" + start_date + "&end=" + end_date);
+      var start_date = document.getElementById("start").value,
+          end_date = document.getElementById("end").value;
+
+      if (start_date != mindate || end_date != maxdate) {
+        var stateObj = { start_date: start_date, end_date: end_date };
+        history.pushState(stateObj, "", "?start=" + start_date + "&end=" + end_date);
+      }
     });
-    */
   }
 </script>
 
@@ -105,9 +108,9 @@ svg {
     <div class="row">
       <div class="col-md-4">
         <div class="input-daterange input-group" id="datepicker">
-          <input type="text" class="form-control" name="start" id="start" onChange="change_date();"/>
+          <input type="text" class="form-control" name="start" id="start" value="2009-12-28" onChange="change_date();"/>
           <span class="input-group-addon">to</span>
-          <input type="text" class="form-control" name="end" id="end" onChange="change_date();" />
+          <input type="text" class="form-control" name="end" id="end" value="2016-05-23" onChange="change_date();" />
         </div>
       </div>
 
@@ -189,6 +192,7 @@ svg {
 <script>
   $(document).ready(function() {
     $(".input-daterange").datepicker({
+      format: "yyyy-mm-dd",
       maxViewMode: 2,
       todayHighlight: true
     });
