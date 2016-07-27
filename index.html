@@ -34,12 +34,15 @@ svg {
   padding-top: 70px;
 }
 
+.col-md-4 {
+  padding-top: 15px;
+}
+
 #nav {
   position: fixed;
   z-index: 1;
   width: 100%;
   background-color: #eee;
-  padding-top: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid black;
 }
@@ -47,6 +50,17 @@ svg {
 .select2-container--bootstrap .select2-selection,
 .select2-container--bootstrap .select2-search--dropdown .select2-search__field,
 .select2-results {
+  font-size: 16px;
+}
+
+#start, #end {
+  font-size: 16px;
+}
+
+#view_by_type, #view_by_ward {
+  display: block;
+  height: 34px;
+  padding-top: 6px;
   font-size: 16px;
 }
 
@@ -72,12 +86,31 @@ svg {
       graph_by_ward(ward);
     });
   }
+
+  function change_date() {
+    /*
+    $(document).ready(function() {
+      var start_date = document.getElementById("start"),
+          end_date = document.getElementById("end");
+
+      var stateObj = { start_date: start_date, end_date: end_date };
+      history.pushState(stateObj, "", "?start=" + start_date + "&end=" + end_date);
+    });
+    */
+  }
 </script>
 
 <div id="nav">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="input-daterange input-group" id="datepicker">
+          <input type="text" class="form-control" name="start" id="start" onChange="change_date();"/>
+          <span class="input-group-addon">to</span>
+          <input type="text" class="form-control" name="end" id="end" onChange="change_date();" />
+        </div>
+      </div>
+
       <div class="col-md-4 text-center">
         <select class="form-control select2" id="service_types" onchange="change_service_type();">
           <option value="all-services">All service types</option>
@@ -141,9 +174,9 @@ svg {
         </select>
       </div>
 
-      <div class="col-md-4 text-right" style="padding-top: 5px;">
-        <a id="view_by_type" href="{{ '/?breakdown=service&ward=all-wards' | prepend: site.baseurl }}" style="font-size: 16px;">View issues by service type</a>
-        <a id="view_by_ward" href="{{ '/?breakdown=ward&code=all-services' | prepend: site.baseurl }}" style="font-size: 16px;">View issues by ward</a>
+      <div class="col-md-4 text-right">
+          <a id="view_by_type" href="{{ '/?breakdown=service&ward=all-wards' | prepend: site.baseurl }}">View issues by service type</a>
+          <a id="view_by_ward" href="{{ '/?breakdown=ward&code=all-services' | prepend: site.baseurl }}">View issues by ward</a>
       </div>
     </div>
   </div>
@@ -155,6 +188,11 @@ svg {
 
 <script>
   $(document).ready(function() {
+    $(".input-daterange").datepicker({
+      maxViewMode: 2,
+      todayHighlight: true
+    });
+
     $.fn.select2.defaults.set("width", null);
     $.fn.select2.defaults.set("theme", "bootstrap");
 
