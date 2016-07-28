@@ -72,6 +72,8 @@ svg {
       var select = document.getElementById("service_types");
       var code = select.options[select.selectedIndex].value;
 
+      change_view_links(start_date, end_date);
+
       var params = ["start=" + start_date, "end=" + end_date, "breakdown=ward", "code=" + code];
       var stateObj = { code: code };
       history.pushState(stateObj, "", "?" + params.join("&"))
@@ -83,6 +85,8 @@ svg {
     $(document).ready(function() {
       var select = document.getElementById("wards");
       var ward = select.options[select.selectedIndex].value;
+
+      change_view_links(start_date, end_date);
 
       var params = ["start=" + start_date, "end=" + end_date, "breakdown=service", "ward=" + ward];
       var stateObj = { ward: ward };
@@ -109,6 +113,17 @@ svg {
           change_ward(start_date, end_date);
         }
       }
+    });
+  }
+
+  function change_view_links(start_date = $("#start").val(), end_date = $("#end").val()) {
+    $(document).ready(function() {
+      var view_by = "{{site.baseurl}}/?start=" + start_date + "&end=" + end_date,
+          by_ward = "&breakdown=ward&code=all-services",
+          by_type = "&breakdown=service&ward=all-wards";
+
+      $("#view_by_ward").attr("href", view_by + by_ward);
+      $("#view_by_type").attr("href", view_by + by_type);
     });
   }
 </script>
@@ -210,12 +225,12 @@ svg {
         end_date = parseUri(link)["queryKey"]["end"];
 
     // Setup datepicker
-    if ( start_date == null || start_date == "" ) {
+    if (start_date == null || start_date == "") {
       start_date = "2010-01-01";
     }
     $("#start").val(start_date);
 
-    if ( end_date == null || end_date == "" ) {
+    if (end_date == null || end_date == "") {
       end_date = "2016-05-31";
     }
     $("#end").val(end_date);
@@ -227,21 +242,20 @@ svg {
       todayHighlight: true
     });
 
+    // Update view by links
+    change_view_links(start_date, end_date);
+
     // Setup select2 fields
     // Graph appropriately
     $.fn.select2.defaults.set("width", null);
     $.fn.select2.defaults.set("theme", "bootstrap");
 
-    var view_by = "{{site.baseurl}}/?start=" + start_date + "&end=" + end_date;
-
     if (breakdown == null || breakdown == "" || breakdown == "service") {
-      view_by += "&breakdown=ward&code=all-services";
-      
       $("#service_types").hide();
       $("#view_by_type").hide();
 
       $("#wards").show();
-      $("#view_by_ward").show().attr("href", view_by);
+      $("#view_by_ward").show();
 
       if (ward == null || ward == "") {
         $("#wards").val("all-wards").select2();
@@ -251,10 +265,8 @@ svg {
         graph_by_ward(ward);
       }
     } else if (breakdown == "ward") {
-      view_by += "&breakdown=service&ward=all-wards";
-
       $("#service_types").show();
-      $("#view_by_type").show().attr("href", view_by);
+      $("#view_by_type").show();
 
       $("#wards").hide();
       $("#view_by_ward").hide();
