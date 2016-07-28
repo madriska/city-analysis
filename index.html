@@ -67,24 +67,24 @@ svg {
 </style>
 
 <script>
-  function change_service_type(start_date, end_date) {
+  function change_service_type(start_date = $("#start").val(), end_date = $("#end").val()) {
     $(document).ready(function() {
       var select = document.getElementById("service_types");
       var code = select.options[select.selectedIndex].value;
 
-      var params = [start_date, end_date, "breakdown=ward", "code=" + code];
+      var params = ["start=" + start_date, "end=" + end_date, "breakdown=ward", "code=" + code];
       var stateObj = { code: code };
       history.pushState(stateObj, "", "?" + params.join("&"))
       graph_by_code(code);
     });
   }
 
-  function change_ward(start_date, end_date) {
+  function change_ward(start_date = $("#start").val(), end_date = $("#end").val()) {
     $(document).ready(function() {
       var select = document.getElementById("wards");
       var ward = select.options[select.selectedIndex].value;
 
-      var params = [start_date, end_date, "breakdown=service", "ward=" + ward];
+      var params = ["start=" + start_date, "end=" + end_date, "breakdown=service", "ward=" + ward];
       var stateObj = { ward: ward };
       history.pushState(stateObj, "", "?" + params.join("&"));
       graph_by_ward(ward);
@@ -96,19 +96,17 @@ svg {
       var mindate = "2010-01-01",
           maxdate = "2016-05-31";
 
-      var start_date = document.getElementById("start").value,
-          end_date = document.getElementById("end").value;
+      var start_date = $("#start").val(),
+          end_date = $("#end").val();
 
       if (start_date != mindate || end_date != maxdate) {
-        var dates = ["start=" + start_date, "end=" + end_date];
-
         var link = window.location.href;
         var breakdown = parseUri(link)["queryKey"]["breakdown"];
 
-        if (breakdown == "ward" || breakdown == null) {
-          change_service_type("start=" + start_date, "end=" + end_date);
+        if (breakdown == "ward" || breakdown == null || breakdown == "") {
+          change_service_type(start_date, end_date);
         } else if (breakdown == "service") {
-          change_ward("start=" + start_date, "end=" + end_date);
+          change_ward(start_date, end_date);
         }
       }
     });
@@ -120,9 +118,9 @@ svg {
     <div class="row">
       <div class="col-md-4">
         <div class="input-daterange input-group" id="datepicker">
-          <input type="text" class="form-control" name="start" id="start" value="2010-01-01" onChange="change_date();"/>
+          <input type="text" class="form-control" name="start" id="start" onChange="change_date();"/>
           <span class="input-group-addon">to</span>
-          <input type="text" class="form-control" name="end" id="end" value="2016-05-31" onChange="change_date();" />
+          <input type="text" class="form-control" name="end" id="end" onChange="change_date();" />
         </div>
       </div>
 
@@ -190,8 +188,8 @@ svg {
       </div>
 
       <div class="col-md-4 text-right">
-          <a id="view_by_type" href="{{ '/?breakdown=service&ward=all-wards' | prepend: site.baseurl }}">View issues by service type</a>
-          <a id="view_by_ward" href="{{ '/?breakdown=ward&code=all-services' | prepend: site.baseurl }}">View issues by ward</a>
+          <a id="view_by_type" >View issues by service type</a>
+          <a id="view_by_ward" >View issues by ward</a>
       </div>
     </div>
   </div>
@@ -203,6 +201,25 @@ svg {
 
 <script>
   $(document).ready(function() {
+    // Parse params from URI
+    var link = window.location.href;
+    var breakdown = parseUri(link)["queryKey"]["breakdown"],
+        code = parseUri(link)["queryKey"]["code"],
+        ward = parseUri(link)["queryKey"]["ward"],
+        start_date = parseUri(link)["queryKey"]["start"],
+        end_date = parseUri(link)["queryKey"]["end"];
+
+    // Setup datepicker
+    if ( start_date == null || start_date == "" ) {
+      start_date = "2010-01-01";
+    }
+    $("#start").val(start_date);
+
+    if ( end_date == null || end_date == "" ) {
+      end_date = "2016-05-31";
+    }
+    $("#end").val(end_date);
+
     $(".input-daterange").datepicker({
       autoclose: true,
       format: "yyyy-mm-dd",
@@ -210,47 +227,45 @@ svg {
       todayHighlight: true
     });
 
+    // Setup select2 fields
+    // Graph appropriately
     $.fn.select2.defaults.set("width", null);
     $.fn.select2.defaults.set("theme", "bootstrap");
 
-    var link = window.location.href;
-    var breakdown = parseUri(link)["queryKey"]["breakdown"],
-        code = parseUri(link)["queryKey"]["code"],
-        ward = parseUri(link)["queryKey"]["ward"];
+    var view_by = "{{site.baseurl}}/?start=" + start_date + "&end=" + end_date;
 
-    if(breakdown == "ward") {
-      $("#service_types").show().select2();
-      $("#view_by_type").show();
-      $("#wards").hide();
-      $("#view_by_ward").hide();
-
-      if(code == null) {
-        graph_by_code("all-services");
-      } else {
-        var select = document.getElementById("service_types");
-        select.value = code;
-        graph_by_code(code);
-      }
-    } else if(breakdown == "service") {
+    if (breakdown == null || breakdown == "" || breakdown == "service") {
+      view_by += "&breakdown=ward&code=all-services";
+      
       $("#service_types").hide();
       $("#view_by_type").hide();
-      $("#wards").show().select2();
-      $("#view_by_ward").show();
 
-      if(ward == null) {
+      $("#wards").show();
+      $("#view_by_ward").show().attr("href", view_by);
+
+      if (ward == null || ward == "") {
+        $("#wards").val("all-wards").select2();
         graph_by_ward("all-wards");
       } else {
-        var select = document.getElementById("wards");
-        select.value = ward;
+        $("#wards").val(ward).select2();
         graph_by_ward(ward);
       }
-    } else if(breakdown == null) {
-      $("#service_types").show().select2();
-      $("#view_by_type").show();
+    } else if (breakdown == "ward") {
+      view_by += "&breakdown=service&ward=all-wards";
+
+      $("#service_types").show();
+      $("#view_by_type").show().attr("href", view_by);
+
       $("#wards").hide();
       $("#view_by_ward").hide();
 
-      graph_by_code("all-services");
+      if (code == null || code == "") {
+        $("#service_types").val("all-services").select2();
+        graph_by_code("all-services");
+      } else {
+        $("#service_types").val(code).select2();
+        graph_by_code(code);
+      }
     }
   });
 </script>
