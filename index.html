@@ -189,6 +189,15 @@ svg {
 
 <script>
   $(document).ready(function() {
+    // resize padding-top as necessary
+    function resize() {
+      var height = $("#nav").outerHeight() + 15;
+      $("#dashboard").css("padding-top", height);
+    }
+
+    $(window).on("resize", resize);
+    resize();
+
     // Parse params from URI
     var link = window.location.href;
     var breakdown = parseUri(link)["queryKey"]["breakdown"],
