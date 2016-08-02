@@ -98,16 +98,8 @@ svg {
     { id: 1853, text: "Tree Trimming" }
   ]
 
-  function update_selection(start_date, end_date) {
+  function update_selection(start_date = $("#start").val(), end_date $("#end").val()) {
     $(document).ready(function() {
-      if (start_date == null) {
-        start_date = $("#start").val();
-      }
-
-      if (end_date == null) {
-        end_date = $("#end").val();
-      }
-
       var select = document.getElementById("selection");
       var selection = select.options[select.selectedIndex].value;
 
