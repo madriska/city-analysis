@@ -1,3 +1,35 @@
+var ward_descriptions = { 1: "Downtown (Green)",
+  2: "Dwight",
+  3: "Hill (North)",
+  4: "Hill (Middle)",
+  5: "Hill (South)",
+  6: "Long Wharf",
+  7: "Downtown (East/South)",
+  8: "Wooster Square / Mill River",
+  9: "East Rock / Fair Haven",
+  10: "East Rock (Park)",
+  11: "Quinnipiac Meadows",
+  12: "Quinnipiac Meadows",
+  13: "Fair Haven Heights",
+  14: "Fair Haven",
+  15: "Fair Haven",
+  16: "Fair Haven",
+  17: "Annex",
+  18: "East Shore",
+  19: "Prospect Hill",
+  20: "Newhallville",
+  21: "Newhallville / Prospect Hill",
+  22: "Dixwell / Downtown (North)",
+  23: "Dwight",
+  24: "Edgewood",
+  25: "Westville (East)",
+  26: "Westville (West)",
+  27: "Amity",
+  28: "Beaver Hills",
+  29: "Beaver Hills",
+  30: "West Rock" }
+  
+
 var draw_graph = function draw_graph(type, ward, code, title) {
   var url = window.location.href;
   var start_date = parseUri(url)["queryKey"]["start"],
@@ -14,7 +46,7 @@ var draw_graph = function draw_graph(type, ward, code, title) {
   }
 
   if (type == "code") {
-    title = "Ward " + ward;
+    title = "Ward " + ward + "-" + ward_descriptions[ward];
     filename += code + "-" + ward + ".csv";
     params.push("breakdown=service", "ward=" + ward);
   } else if (type == "ward") {
