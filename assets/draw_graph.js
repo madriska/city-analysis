@@ -27,7 +27,7 @@ var ward_descriptions = { 1: "Downtown (Green)",
   27: "Amity",
   28: "Beaver Hills",
   29: "Beaver Hills",
-  30: "West Rock" }
+  30: "West Rock" };
   
 
 var draw_graph = function draw_graph(type, ward, code, title) {
