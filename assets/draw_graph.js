@@ -1,4 +1,4 @@
-var draw_graph = function draw_graph(type, ward, code, title, resize) {
+var draw_graph = function draw_graph(type, ward, code, title) {
   var url = window.location.href;
   var start_date = parseUri(url)["queryKey"]["start"],
       end_date = parseUri(url)["queryKey"]["end"];
@@ -14,6 +14,7 @@ var draw_graph = function draw_graph(type, ward, code, title, resize) {
   }
 
   if (type == "code") {
+    title = "Ward " + ward;
     filename += code + "-" + ward + ".csv";
     params.push("breakdown=service", "ward=" + ward);
   } else if (type == "ward") {
@@ -29,22 +30,14 @@ var draw_graph = function draw_graph(type, ward, code, title, resize) {
   link = "/city-analysis/?" + params.join("&");
 
   var a = document.createElement("a");
-  $(a).attr("href", link);
-  $(a).attr("class", "graphLink");
-
-  if (resize) {
-    var w = Math.round( $("#graphs").width() * 0.95 );
-    var h = Math.round( (w * 300) / 400 );
-  } else {
-    var w = 400,
-        h = 300;
-  }
+  a.href = link;
+  a.className = "graphLink";
 
   document.getElementById("graphs").appendChild(a);
 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
-      width = w - margin.left - margin.right,
-      height = h - margin.top - margin.bottom;
+      width = 400 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
 
   var parseDate = d3.time.format("%Y-%m-%d").parse;
 
@@ -83,7 +76,7 @@ var draw_graph = function draw_graph(type, ward, code, title, resize) {
           .attr("height", height + margin.top + margin.bottom)
       .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+  
   svg.className = "col-sm-6 col-md-4";
 
   d3.csv(filename, function(error, data) {
@@ -169,7 +162,7 @@ var draw_graph = function draw_graph(type, ward, code, title, resize) {
   });
 };
 
-var graph_by_code = function graph_by_code(code, resize) {
+var graph_by_code = function graph_by_code(code) {
   var type = "code";
   var graphs = document.getElementById("graphs");
   while (graphs.hasChildNodes()) {
@@ -178,45 +171,45 @@ var graph_by_code = function graph_by_code(code, resize) {
 
   for (i = 1; i < 31; i++) {
     var ward = i.toString();
-    draw_graph(type, ward, code, "Ward " + i, resize);
+    draw_graph(type, ward, code);
   }
 };
 
-var graph_by_ward = function graph_by_ward(ward, resize) {
+var graph_by_ward = function graph_by_ward(ward) {
   var type = "ward";
   var graphs = document.getElementById("graphs");
   while (graphs.hasChildNodes()) {
     graphs.removeChild(graphs.lastChild);
   }
 
-  draw_graph(type, ward, "5743", "Bins for Trash & Recycling", resize);
-  draw_graph(type, ward, "122",  "Graffiti", resize);
-  draw_graph(type, ward, "6215", "Hangers", resize);
+  draw_graph(type, ward, "5743", "Bins for Trash & Recycling");
+  draw_graph(type, ward, "122",  "Graffiti");
+  draw_graph(type, ward, "6215", "Hangers");
 
-  draw_graph(type, ward, "5185",  "Health Complaints", resize);
-  draw_graph(type, ward, "1250",  "Illegal Dumping", resize);
-  draw_graph(type, ward, "12386", "Library Issues", resize);
+  draw_graph(type, ward, "5185",  "Health Complaints");
+  draw_graph(type, ward, "1250",  "Illegal Dumping");
+  draw_graph(type, ward, "12386", "Library Issues");
 
-  draw_graph(type, ward, "374",  "Other", resize);
-  draw_graph(type, ward, "3018", "Other - city responsibility", resize);
-  draw_graph(type, ward, "372",  "Parking Meter", resize);
+  draw_graph(type, ward, "374",  "Other");
+  draw_graph(type, ward, "3018", "Other - city responsibility");
+  draw_graph(type, ward, "372",  "Parking Meter");
 
-  draw_graph(type, ward, "121",  "Parking Violation/Abandoned Auto", resize);
-  draw_graph(type, ward, "126",  "Parks Request", resize);
-  draw_graph(type, ward, "2626", "Policing Issue", resize);
+  draw_graph(type, ward, "121",  "Parking Violation/Abandoned Auto");
+  draw_graph(type, ward, "126",  "Parks Request");
+  draw_graph(type, ward, "2626", "Policing Issue");
 
-  draw_graph(type, ward, "116",  "Potholes", resize);
-  draw_graph(type, ward, "1251", "Private Property Issue", resize);
-  draw_graph(type, ward, "1249", "Public Space, Streets and Drains", resize);
+  draw_graph(type, ward, "116",  "Potholes");
+  draw_graph(type, ward, "1251", "Private Property Issue");
+  draw_graph(type, ward, "1249", "Public Space, Streets and Drains");
 
-  draw_graph(type, ward, "117", "Sidewalks and Curb damage", resize);
-  draw_graph(type, ward, "373", "Signs / Bus Shelters / Pavement Markings", resize);
-  draw_graph(type, ward, "124", "Street Lamp", resize);
+  draw_graph(type, ward, "117", "Sidewalks and Curb damage");
+  draw_graph(type, ward, "373", "Signs / Bus Shelters / Pavement Markings");
+  draw_graph(type, ward, "124", "Street Lamp");
 
-  draw_graph(type, ward, "5251", "Street Sweeping", resize);
-  draw_graph(type, ward, "51",   "Traffic Signal / Pedestrian Signal", resize);
-  draw_graph(type, ward, "2625", "Traffic/Road Safety", resize);
+  draw_graph(type, ward, "5251", "Street Sweeping");
+  draw_graph(type, ward, "51",   "Traffic Signal / Pedestrian Signal");
+  draw_graph(type, ward, "2625", "Traffic/Road Safety");
 
-  draw_graph(type, ward, "1966", "Trash & Recycling", resize);
-  draw_graph(type, ward, "1853", "Tree Trimming", resize);
+  draw_graph(type, ward, "1966", "Trash & Recycling");
+  draw_graph(type, ward, "1853", "Tree Trimming");
 };

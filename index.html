@@ -192,7 +192,15 @@ svg {
 </div>
 
 <script>
+
   $(document).ready(function() {
+    // resize padding-top as necessary
+    function resize() {
+      var height = $("#nav").outerHeight() + 15;
+      $("#dashboard").css("padding-top", height);
+    }
+    $(window).on("resize", resize);
+
     // Parse params from URI
     var link = window.location.href;
     var breakdown = parseUri(link)["queryKey"]["breakdown"],
@@ -200,29 +208,6 @@ svg {
         ward = parseUri(link)["queryKey"]["ward"],
         start_date = parseUri(link)["queryKey"]["start"],
         end_date = parseUri(link)["queryKey"]["end"];
-
-    if (ward == null || ward == "") {
-      ward = "all-wards";
-    }
-
-    if (code == null || code == "") {
-      code = "all-services";
-    }
-
-    // resize padding-top as necessary
-    function resize() {
-      var height = $("#nav").outerHeight() + 15;
-      $("#dashboard").css("padding-top", height);
-
-      var resize = ($("#graphs").width() <= 400);
-
-      if (breakdown == null || breakdown == "" || breakdown == "service") {
-        graph_by_ward(ward, resize);
-      } else if (breakdown == "ward") {
-        graph_by_code(code, resize);
-      }
-    }
-    $(window).on("resize", resize);
 
     // Setup datepicker
     if (start_date == null || start_date == "") {
@@ -252,8 +237,9 @@ svg {
 
       $("#view_by").attr("class", "ward").text("View issues by ward");
 
-      if (ward == "all-wards") {
-        graph_by_ward(ward);
+      if (ward == null || ward == "") {
+        graph_by_ward("all-wards");
+
       } else {
         $("#selection").val(ward).change();
       }
@@ -263,9 +249,9 @@ svg {
 
       $("#view_by").attr("class", "type").text("View issues by service type");
 
-      if (code == "all-services") {
+      if (code == null || code == "") {
         //$("#service_types").val("all-services");
-        graph_by_code(code);
+        graph_by_code("all-services");
       } else {
         $("#selection").val(code).change();
         //graph_by_code(code);
