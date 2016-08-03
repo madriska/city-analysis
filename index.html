@@ -181,6 +181,7 @@ svg {
       </div>
 
       <div class="col-md-4 text-right">
+          <span class="changelog"></span>
           <a id="view_by" onClick="update_link();"></a>
       </div>
     </div>
@@ -259,3 +260,11 @@ svg {
     }
   });
 </script>
+
+<script>
+  var HW_config = {
+    selector: ".changelog", // CSS selector where to inject the badge
+    account: "JlbD5x" // your account ID
+  };
+</script>
+<script async src="//cdn.headwayapp.co/widget.js"></script>
