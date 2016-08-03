@@ -46,7 +46,7 @@ var draw_graph = function draw_graph(type, ward, code, title) {
   }
 
   if (type == "code") {
-    title = "Ward " + ward + "-" + ward_descriptions[ward];
+    title = "Ward " + ward + " - " + ward_descriptions[ward];
     filename += code + "-" + ward + ".csv";
     params.push("breakdown=service", "ward=" + ward);
   } else if (type == "ward") {
