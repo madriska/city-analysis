@@ -68,7 +68,7 @@ svg {
 <script>
   var wards = [{ id: "all-wards", text: "All wards" }];
   for (var i = 1; i < 31; i++) {
-    wards.push({ id: i, text: "Ward " + i});
+    wards.push({ id: i, text: "Ward " + i + " - " + ward_descriptions[i]});
   }
 
   var service_types = [
