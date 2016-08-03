@@ -31,7 +31,7 @@ svg {
 }
 
 #dashboard {
-  padding-top: 70px;
+  padding-top: 80px;
 }
 
 .col-md-4 {
@@ -118,13 +118,13 @@ svg {
       if (first == "all-wards") {
         params.push("breakdown=service", "ward=" + selection);
         var stateObj = { ward: selection };
-        history.pushState(stateObj, "", "?" + params.join("&"));
+        history.replaceState(stateObj, "", "?" + params.join("&"));
         graph_by_ward(selection);
 
       } else if (first == "all-services") {
         params.push("breakdown=ward", "code=" + selection);
         var stateObj = { code: selection };
-        history.pushState(stateObj, "", "?" + params.join("&"));
+        history.replaceState(stateObj, "", "?" + params.join("&"));
         graph_by_code(selection);
       }
     });
@@ -192,15 +192,14 @@ svg {
 </div>
 
 <script>
+
   $(document).ready(function() {
     // resize padding-top as necessary
     function resize() {
       var height = $("#nav").outerHeight() + 15;
       $("#dashboard").css("padding-top", height);
     }
-
     $(window).on("resize", resize);
-    resize();
 
     // Parse params from URI
     var link = window.location.href;
