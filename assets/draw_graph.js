@@ -35,24 +35,48 @@ var draw_graph = function draw_graph(type, ward, code, title) {
   var start_date = parseUri(url)["queryKey"]["start"],
       end_date = parseUri(url)["queryKey"]["end"];
 
-  var filename = "assets/data/";
+  var params = [],
+      filename = "assets/data/",
+      graph_link = null;
 
   if (start_date == null && end_date == null) {
     start_date = "2010-01-01";
     end_date = "2016-05-31";
+  } else {
+    params.push("start=" + start_date, "end=" + end_date);
   }
 
   if (type == "code") {
     title = "Ward " + ward + " - " + ward_descriptions[ward];
     filename += code + "-" + ward + ".csv";
-
+    params.push("breakdown=service", "ward=" + ward);
+    graph_link = "ward";
   } else if (type == "ward") {
+    params.push("breakdown=ward", "code=" + code);
+    graph_link = "code";
+
     if (ward == "all-wards") {
       filename += "all-wards-" + code + ".csv";
     } else {
       filename += code + "-" + ward + ".csv";
     }
   }
+
+  var a = document.createElement("a");
+  a.className = "graphLink";
+
+  $(a).click(function() {
+    var stateObj = { };
+    history.replaceState({}, "", "?" + params.join("&"));
+
+    if (graph_link == "code") {
+      graph_by_code(code);
+    } else if (graph_link = "ward") {
+      graph_by_ward(ward);
+    }
+  });
+
+  document.getElementById("graphs").appendChild(a);
 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
       width = 400 - margin.left - margin.right,
@@ -89,7 +113,7 @@ var draw_graph = function draw_graph(type, ward, code, title) {
       .x(function(d) { return x(d.week); })
       .y(function(d) { return y(d.closed); });
 
-  var svg = d3.select("#graphs")
+  var svg = d3.select(a)
       .append("svg")
           .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
