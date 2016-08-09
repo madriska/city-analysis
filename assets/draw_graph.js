@@ -36,7 +36,8 @@ var draw_graph = function draw_graph(type, ward, code, title) {
       end_date = parseUri(url)["queryKey"]["end"];
 
   var params = [],
-      filename = "assets/data/";
+      filename = "assets/data/",
+      graph_link = null;
 
   if (start_date == null && end_date == null) {
     start_date = "2010-01-01";
@@ -49,8 +50,10 @@ var draw_graph = function draw_graph(type, ward, code, title) {
     title = "Ward " + ward + " - " + ward_descriptions[ward];
     filename += code + "-" + ward + ".csv";
     params.push("breakdown=service", "ward=" + ward);
+    graph_link = "ward";
   } else if (type == "ward") {
     params.push("breakdown=ward", "code=" + code);
+    graph_link = "code";
 
     if (ward == "all-wards") {
       filename += "all-wards-" + code + ".csv";
@@ -59,11 +62,19 @@ var draw_graph = function draw_graph(type, ward, code, title) {
     }
   }
 
-  link = "/city-analysis/?" + params.join("&");
-
   var a = document.createElement("a");
-  a.href = link;
   a.className = "graphLink";
+
+  $(a).click(function() {
+    var stateObj = { };
+    history.replaceState({}, "", "?" + params.join("&"));
+
+    if (graph_link == "code") {
+      graph_by_code(code);
+    } else if (graph_link = "ward") {
+      graph_by_ward(ward);
+    }
+  });
 
   document.getElementById("graphs").appendChild(a);
 
