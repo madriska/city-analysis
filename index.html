@@ -256,11 +256,9 @@ svg {
       $("#view_by").attr("class", "type").text("View issues by service type");
 
       if (code == null || code == "") {
-        //$("#service_types").val("all-services");
         graph_by_code("all-services");
       } else {
         $("#selection").val(code).change();
-        //graph_by_code(code);
       }
     }
   });
