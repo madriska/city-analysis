@@ -149,22 +149,34 @@ svg {
     }
   }
 
-  function update_link() {
+  function update_link(selection) {
+    $(window).scrollTop(0);
+
     klass = $("#view_by").attr("class");
 
     if (klass == "ward") {
       $("#view_by").attr("class", "type").text("View issues by service type");
 
       $("#selection").select2("destroy").empty()
-        .select2({ data: service_types })
-        .val("all-services").change();
+        .select2({ data: service_types });
+
+      if (selection) {
+        $("#selection").val(selection).change();
+      } else {
+        $("#selection").val("all-services").change();
+      }
 
     } else if (klass == "type") {
       $("#view_by").attr("class", "ward").text("View issues by ward");
 
       $("#selection").select2("destroy").empty()
-        .select2({ data: wards })
-        .val("all-wards").change();
+        .select2({ data: wards });
+
+      if (selection) {
+        $("#selection").val(selection).change();
+      } else {
+        $("#selection").val("all-wards").change();
+      }
     }
   }
 </script>

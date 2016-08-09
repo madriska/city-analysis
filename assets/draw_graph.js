@@ -66,12 +66,13 @@ var draw_graph = function draw_graph(type, ward, code, title) {
   a.className = "graphLink";
 
   $(a).click(function() {
-    var stateObj = { };
     history.replaceState({}, "", "?" + params.join("&"));
 
     if (graph_link == "code") {
+      update_link(code);
       graph_by_code(code);
     } else if (graph_link = "ward") {
+      update_link(ward);
       graph_by_ward(ward);
     }
   });
